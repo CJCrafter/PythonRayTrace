@@ -12,8 +12,8 @@ from material import Material
 # Set up coordinate system/constants
 rays_per_pixel = 100
 max_bounce = 10
-width = 1000
-height = 1000
+width = 1200
+height = 1200
 fov = math.pi / 2  # 90 degrees
 distance_to_screen = 1.0
 
@@ -97,15 +97,16 @@ def main():
 
     # Define geometry
     geometry = [
-        # Sphere(Vector(-20, 20, -100), 50.0, Material(Vector(0, 0, 0), Vector(1, 1, 1), 1)),  # sun
+        #Sphere(Vector(-30, 100, 80), 60.0, Material(emission=Vector(1, 0.75, 0.75), emission_strength=3)),  # sun
+        Sphere(Vector(2.7, 12, 6), 6, Material(emission=Vector(1, 1, 1), emission_strength=1.7)),
 
         Sphere(Vector(0, -50, 15), 50, Material(Vector(1, 0, 1))),
-        Sphere(Vector(-6, 2, 10), 2.0, Material(Vector(1, 0, 0))),
-        Sphere(Vector(0, 2, 10), 2.5, Material(Vector(0, 0, 0), Vector(1, 1, 1), 1.5)),
+        Sphere(Vector(-6, 2, 10), 2.0, Material(Vector(1, 0, 0), smoothness=0.3)),
+        Sphere(Vector(0, 0, 10), 3.0, Material(Vector(0, 1, 0), smoothness=1.0)),
         Sphere(Vector(6, 2, 10), 2.0, Material(Vector(0, 0, 1))),
     ]
 
-    num_processes = 24  # You can adjust the number of processes based on your CPU
+    num_processes = 10  # You can adjust the number of processes based on your CPU
     rows_per_process = height // num_processes
 
     with multiprocessing.Pool(processes=num_processes) as pool:
